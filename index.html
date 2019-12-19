@@ -1,0 +1,116 @@
+<html>
+<head>
+	<meta charset="utf8">
+	<title>example</title>
+</head>
+<body>
+<div class="sku"></div>
+<script type="text/html" id="sku_tpl">
+	{{ each list item i}}
+	<div class="line">
+		<div data-id="{{item.id}}">{{item.name}}</div>
+		<div class="item-values">
+			{{ each item.list v ij}}
+			<div data-id="{{v.id}}" data-pid="{{item.id}}" {{if v.tips }} data-tips="{{v.tips}}" {{/if}} {{if v.img}}class="thumb-txt"{{ /if }}>
+				{{ if v.img }}
+				<div class="sku-img"><img src="{{ v.img }}" alt="{{ v.name }}"></div>
+				{{ /if }}
+				<div>{{v.name}}</div>
+			</div>
+			{{ /each }}
+		</div>
+	</div>
+	{{/each}}
+</script>
+<link type="text/css" href="sku.css" rel="stylesheet"/>
+<script src="./libs/jquery.min.js"></script>
+<script src="./libs/template-web.js"></script>
+<script src="./src/sku.js"></script>
+
+<script>
+	var skus = {
+        // 套餐1 + 64G + 红色和白色 + 任意
+        '|1:2|3:4|7:8|11:12|':'url1',
+        '|1:2|3:4|7:8|11:13|':'url1',
+        '|1:2|3:4|7:8|11:14|':'url1',
+
+        '|1:2|3:4|7:9|11:12|':'url2',
+        '|1:2|3:4|7:9|11:13|':'url2',
+        '|1:2|3:4|7:9|11:14|':'url2',
+
+        // 套餐1 + 128G + 白色和豆沙绿 + 任意
+        '|1:2|3:5|7:9|11:12|':'url4',
+        '|1:2|3:5|7:9|11:13|':'url4',
+        '|1:2|3:5|7:9|11:14|':'url4',
+
+        '|1:2|3:5|7:10|11:12|':'url5',
+        '|1:2|3:5|7:10|11:13|':'url5',
+        '|1:2|3:5|7:10|11:14|':'url5',
+
+        // 套餐1 + 256G + 任意颜色 + 任意
+        '|1:2|3:6|7:8|11:12|':'url6',
+        '|1:2|3:6|7:8|11:13|':'url6',
+        '|1:2|3:6|7:8|11:14|':'url6',
+
+        '|1:2|3:6|7:9|11:12|':'url7',
+        '|1:2|3:6|7:9|11:13|':'url7',
+        '|1:2|3:6|7:9|11:14|':'url7',
+
+        '|1:2|3:6|7:10|11:12|':'url8',
+        '|1:2|3:6|7:10|11:13|':'url8',
+        '|1:2|3:6|7:10|11:14|':'url8',
+
+
+        // 套餐2 + 64G + 红色 + 任意
+        '|1:15|3:4|7:8|11:12|':'url9',
+        '|1:15|3:4|7:8|11:13|':'url9',
+        '|1:15|3:4|7:8|11:14|':'url9',
+
+        // 套餐2 + 64G + 豆沙绿 + 任意
+        '|1:15|3:4|7:10|11:12|':'url10',
+        '|1:15|3:4|7:10|11:13|':'url10',
+        '|1:15|3:4|7:10|11:14|':'url10',
+
+        // 套餐2 + 256G + 任意颜色 + 任意
+        '|1:15|3:6|7:8|11:12|':'url11',
+        '|1:15|3:6|7:8|11:13|':'url11',
+        '|1:15|3:6|7:8|11:14|':'url11',
+
+        '|1:15|3:6|7:9|11:12|':'url12',
+        '|1:15|3:6|7:9|11:13|':'url12',
+        '|1:15|3:6|7:9|11:14|':'url12',
+
+        '|1:15|3:6|7:10|11:12|':'url13',
+        '|1:15|3:6|7:10|11:13|':'url13',
+        '|1:15|3:6|7:10|11:14|':'url13',
+    };
+	var sku = '|1:15|3:4|7:8|11:12|';
+    var properties = [
+		{'id':1,'name':'套餐', 'list':[
+			{'id':2,'name':'官方套餐'},
+            {'id':15,'name':'官方套餐+延保1年'},
+		]},
+        {'id':3,'name':'内存', 'list':[
+            {'id':4,'name':'64G'},
+            {'id':5,'name':'128G'},
+            {'id':6,'name':'256G'},
+        ]},
+        {'id':7,'name':'颜色', 'list':[
+            {'id':8,'name':'红色', 'img':'http://test.siifchina.com/image/cache/catalog/%E7%94%B5%E5%AD%90%E4%BA%A7%E5%93%81/iPhone%2011%20icon/iPhone%20%E9%BB%91%E8%89%B2-100x100.jpg'},
+            {'id':9,'name':'白色', 'img':'http://test.siifchina.com/image/cache/catalog/%E7%94%B5%E5%AD%90%E4%BA%A7%E5%93%81/iPhone%2011%20icon/iPhone%20%E7%99%BD%E8%89%B2-100x100.jpg'},
+            {'id':10,'name':'豆沙绿', 'img':'http://test.siifchina.com/image/cache/catalog/%E7%94%B5%E5%AD%90%E4%BA%A7%E5%93%81/iPhone%2011%20icon/iPhone%20%E7%99%BD%E8%89%B2-100x100.jpg'},
+        ]},
+        {'id':11,'name':'配送方式', 'list':[
+            {'id':12,'name':'港口自提','tips':'(送货到港口，买家自提，CIF到港)'},
+            {'id':13,'name':'送货到门', 'tips':'(送货到门，CIF到港价+清关、税费、国内运费等费用)'},
+            {'id':14,'name':'门店自取', 'tips':''},
+        ]},
+	];
+
+
+	var shop_sku1 = new ShopSKU({skus:skus, sku:sku, properties:properties, selector:'.sku', tpl_selector: '#sku_tpl', redirect: function(d){
+	    console.log('redirect: ', d);
+	}});
+</script>
+</body>
+</html>
