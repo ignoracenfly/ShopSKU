@@ -1,0 +1,65 @@
+.sku{}
+.sku .line{
+    display: grid;
+    grid-template-columns: 65px 1fr;
+    margin: 5px 0;
+}
+.sku .line>*{margin: auto 0;}
+.item-values{
+    position: relative;
+}
+.item-values>div{
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    color: #333;
+    margin-right: 5px;
+    cursor: pointer;
+    background: #fff;
+}
+.item-values>div:hover{
+    border: 1px solid #FF5000;
+}
+.item-values>div.disable{
+    color: #ccc;
+    cursor: no-drop;
+    border:1px dashed #ccc;
+}
+.item-values>div.disable:hover{
+    border: 1px dashed #ccc;
+}
+.item-values>div>*{
+    display: inline-block;
+}
+.item-values>div.selected{
+    border: 1px solid #FF5000;
+    color: #FF5000;
+}
+.item-values .thumb-txt{
+    display: inline-grid;
+    grid-template-columns: 30px auto;
+    grid-column-gap: 5px;
+}
+.item-values .thumb-txt>*{
+    margin: auto;
+}
+.item-values .sku-img{
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+}
+.item-values .sku-img>img{
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+.item-values .item-values-tips{
+    border: none;
+    display: block;
+    clear: both;
+    color: #333;
+    position: absolute;
+}
+.item-values .item-values-tips:hover{
+    border: none;
+}
